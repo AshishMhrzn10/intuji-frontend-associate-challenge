@@ -24,25 +24,25 @@ const Chart = () => {
   ];
 
   return (
-    <Card>
+    <Card className="shadow-none border-none">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="!font-bold">Analytics</CardTitle>
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-purple-600" />
+        <CardTitle className="text-xl !font-bold">Analytics</CardTitle>
+        <div className="flex items-center gap-4 text-sm text-black">
+          <div className="flex items-center gap-3 text-sm">
+            <span className="w-2 h-2 rounded-full bg-purple-600 text-xs" />
             Label1
           </div>
-          <div className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-yellow-400" />
-            Label1
+          <div className="flex items-center gap-3 text-sm">
+            <span className="w-2 h-2 rounded-full bg-yellow-400 text-xs" />
+            Label2
           </div>
-          <select className="ml-2 rounded border px-2 py-1 text-xs text-muted-foreground">
+          <select className="ml-2 rounded-sm border px-2 py-1 text-sm text-[#7C7C7C]">
             <option>Weekly</option>
             <option>Monthly</option>
           </select>
         </div>
       </CardHeader>
-      <CardContent className="h-[250px]">
+      <CardContent className="h-[280px]">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={chartData}
