@@ -10,6 +10,7 @@ import {
   Menu,
   MessageSquare,
   MoveRight,
+  MoveUpRight,
   Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,7 @@ import Wallet from "@/assets/wallet.png";
 import Incomes from "@/assets/incomes.png";
 import Expenses from "@/assets/expenses.png";
 import Image from "next/image";
+import Chart from "@/components/Chart";
 
 const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -46,6 +48,37 @@ const Home = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  const overviewData = [
+    {
+      title: "Your Balance",
+      value: "$28,891.138",
+      change: 15,
+      icon: Wallet,
+      color: "green"
+    },
+    {
+      title: "Saving",
+      value: "$1,050.44",
+      change: 10,
+      icon: Saving,
+      color: "red"
+    },
+    {
+      title: "Expenses",
+      value: "$200.31",
+      change: 2,
+      icon: Expenses,
+      color: "yellow"
+    },
+    {
+      title: "Incomes",
+      value: "$21,121.0",
+      change: 8,
+      icon: Incomes,
+      color: "blue"
+    }
+  ];
 
   return (
     <div className="flex border-transparent rounded-xl mx-2">
@@ -70,7 +103,6 @@ const Home = () => {
       </aside>
 
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
-        {/* Top header split into two parts */}
         <div className="flex items-center p-4  ">
           <div className="flex lg:w-2/3 pr-4">
             {isMobile && (
@@ -133,36 +165,12 @@ const Home = () => {
                 <div className="space-y-4 bg-white p-4 rounded-lg">
                   <h2 className="text-xl font-bold">Overview</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <OverviewCard
-                      title="Your Balance"
-                      value="$28,891.138"
-                      change={15}
-                      changeType="increase"
-                      icon={Wallet}
-                    />
-                    <OverviewCard
-                      title="Saving"
-                      value="$1,050.44"
-                      change={10}
-                      changeType="increase"
-                      icon={Saving}
-                    />
-                    <OverviewCard
-                      title="Expenses"
-                      value="$200.31"
-                      change={2}
-                      changeType="increase"
-                      icon={Expenses}
-                    />
-                    <OverviewCard
-                      title="Incomes"
-                      value="$21,121.0"
-                      change={8}
-                      changeType="increase"
-                      icon={Incomes}
-                    />
+                    {overviewData.map((item, index) => (
+                      <OverviewCard key={index} {...item} />
+                    ))}
                   </div>
                 </div>
+                <Chart />
               </div>
             </div>
           </div>
@@ -172,28 +180,27 @@ const Home = () => {
   );
 };
 
-const OverviewCard = ({ title, value, change, changeType, icon }) => {
+const OverviewCard = ({ title, value, change, icon, color }) => {
+  const colorClass = {
+    blue: "bg-blue-200 text-cblue-600",
+    green: "bg-green-200 text-green-600",
+    red: "bg-red-200 text-red-600",
+    yellow: "bg-yellow-200 text-yellow-600"
+  };
   return (
     <div className="bg-white rounded-lg p-3 border">
-      <div className="flex  items-center justify-center gap-2">
-        {/* <div
-          className={`w-8 h-8 rounded-full ${colorMap[color]} flex items-center justify-center`}
-        >
-          <div className="w-3 h-3 bg-white rounded-full" />
-        </div> */}
+      <div className="flex  items-center  gap-2">
         <Image src={icon} height="100%" width="100%" alt={title} />
         <div className="flex flex-col ">
           <h3 className="text-sm font-medium mt-2">{title}</h3>
-          <p className="text-xs text-gray-500">
-            <span
-              className={
-                changeType === "increase" ? "text-green-500" : "text-red-500"
-              }
-            >
-              {change}%
-            </span>{" "}
-            compared with last month
-          </p>
+          <div className="flex items-center gap-1">
+            <div className={`border rounded-sm ${colorClass[color]}`}>
+              <MoveUpRight size={14} />
+            </div>
+            <p className="text-xs text-gray-500">
+              <span>{change}%</span> compared with last month
+            </p>
+          </div>
         </div>
       </div>
       <Separator className="my-3" />

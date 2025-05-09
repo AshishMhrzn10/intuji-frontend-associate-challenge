@@ -22,17 +22,17 @@ const Sidebar = ({ onClose }) => {
       <button
         className={cn(
           "flex items-center gap-3 cursor-pointer px-3 py-1 text-gray-500 transition-all hover:text-gray-900",
-          activeItem === label && "border-l-3 rounded-none border-black"
+          activeItem == label ? "border-l-3 rounded-none border-black" : ""
         )}
         onClick={() => {
           setActiveItem(label);
         }}
       >
         <div className="flex items-center justify-center gap-4 ml-6">
-          <span className={activeItem === label && "text-[#f9ba33]"}>
+          <span className={activeItem == label ? "text-[#f9ba33]" : ""}>
             {icon}
           </span>
-          <span className={activeItem === label && "text-black font-bold"}>
+          <span className={activeItem == label ? "text-black font-bold" : ""}>
             {label}
           </span>
         </div>
