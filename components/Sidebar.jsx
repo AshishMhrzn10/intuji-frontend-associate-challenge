@@ -63,7 +63,7 @@ const Sidebar = ({ onClose }) => {
   return (
     <>
       <div className="p-4 flex items-center justify-between">
-        <div className="h-10 w-full bg-gray-100 rounded flex items-center justify-center ">
+        <div className="h-16 w-full bg-gray-100 rounded flex items-center justify-center ">
           <img
             src="https://cdn.intuji.com/2023/05/header-icon-1.svg"
             className="h-[80%]"
